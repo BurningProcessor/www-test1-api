@@ -8,19 +8,18 @@ async function bootstrap() {
 	app.setGlobalPrefix('api')
 	app.enableVersioning({
 		type: VersioningType.HEADER,
-    header: 'version'
+		header: 'version',
 	})
-  app.enableCors()
+	app.enableCors()
 
 	const config = new DocumentBuilder()
-    .setTitle('Versioning Example')
-    .setDescription('The API description')
-    .build()
+		.setTitle('Versioning Example')
+		.setDescription('The API description')
+		.build()
 
 	const document = SwaggerModule.createDocument(app, config)
 	SwaggerModule.setup('api', app, document)
-	
-  await app.listen(3000)
-	
+
+	await app.listen(process.env.PORT)
 }
 bootstrap()
