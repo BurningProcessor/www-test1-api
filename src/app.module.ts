@@ -11,7 +11,7 @@ import { Registration } from './registration/entities/registration.entity'
 @Module({
 	imports: [
 		ConfigModule.forRoot({
-			envFilePath: ['.env.local', '.env'],
+			envFilePath: ['.env.dev', '.env'],
 			isGlobal: true,
 		}),
 		TypeOrmModule.forRootAsync({
