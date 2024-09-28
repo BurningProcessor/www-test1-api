@@ -21,8 +21,29 @@ export class DoingService {
 		})
 	}
 
-	async findAll() {
-		return this.doingRepository.find()
+	async findAll(sort?: string) {
+		switch (sort) {
+			case 'titleDown': {
+				return this.doingRepository.find({ order: { title: 'ASC' } })
+			}
+			case 'titleUp': {
+				return this.doingRepository.find({ order: { title: 'DESC' } })
+			}
+			case 'dateDown': {
+				return this.doingRepository.find({ order: { date: 'ASC' } })
+			}
+			case 'dateUp': {
+				return this.doingRepository.find({ order: { date: 'DESC' } })
+			}
+			case 'organizerDown': {
+				return this.doingRepository.find({ order: { organizer: 'ASC' } })
+			}
+			case 'organizerUp': {
+				return this.doingRepository.find({ order: { organizer: 'DESC' } })
+			}
+			default:
+				return this.doingRepository.find()
+		}
 	}
 
 	findOne(id: number) {

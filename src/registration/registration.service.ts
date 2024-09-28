@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Repository } from 'typeorm'
+import { Like, Repository } from 'typeorm'
 import { Registration } from './entities/registration.entity'
 import { RegistrateUserDto } from './dto/registrate-user.dto'
 
@@ -21,5 +21,13 @@ export class RegistrationService {
 		})
 
 		return user
+	}
+
+	async findByDoing(doingId: number, name?, email?) {
+		return await this.registrationRepository.findBy({
+			doing: { id: doingId },
+			name: name ? Like(`%${name}%`) : null,
+			email: email ? Like(`%${email}%`) : null,
+		})
 	}
 }
